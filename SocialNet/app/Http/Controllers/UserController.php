@@ -81,4 +81,17 @@ class UserController extends Controller
 
         return redirect('/');
     }
+
+    /**
+     * Display the profile for the given user.
+     *
+     * -param  \App\Models\User  $user
+     * -return \Illuminate\View\View
+     */
+    public function profile(User $user){
+        
+        return view('profile-posts',['username' => $user->username,
+        'posts' =>$user->posts()->latest()->get(),
+        'postCount' =>$user->posts()->count()]);
+    }
 }
